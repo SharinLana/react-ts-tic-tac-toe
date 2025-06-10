@@ -25,7 +25,7 @@ function App() {
 
     // handling the draw case
     if (!boardValues.includes("")) setWinner("draw");
-
+    // checking for a match between boardValues and winCombinations
     for (let [a, b, c] of winCombinations) {
       if (
         boardValues[a] &&
@@ -35,36 +35,42 @@ function App() {
         setWinner(boardValues[a]);
       }
     }
-  }, [boardValues]);
+  }, [boardValues, winner]);
 
   const handleTurns = (cellVal: string, index: number): void => {
+    console.log(cellVal);
     const updatedBoard = [...boardValues];
     updatedBoard[index] = cellVal;
     setBoardValues(updatedBoard);
     setPlayerTurn((prev) => !prev);
   };
+  // console.log(boardValues)
 
   return (
-    <>
-      {winner &&
-        (winner !== "draw" ? (
-          <p>The winner is {winner}!</p>
-        ) : (
-          <p>It's a draw</p>
-        ))}
-      <div className="board-container">
-        {squares.map((square, idx) => (
-          <Square
-            key={square}
-            id={square}
-            value={boardValues[idx]}
-            playerTurn={playerTurn}
-            onHandleTurns={(cellValue: string) => handleTurns(cellValue, idx)}
-            disabled={boardValues[idx] !== "" || winner !== ""}
-          />
-        ))}
+    <main>
+      <div className="winner-container">
+        {winner &&
+          (winner !== "draw" ? (
+            <p>The winner is {winner}!</p>
+          ) : (
+            <p>It's a draw</p>
+          ))}
       </div>
-    </>
+      <div className="board-container">
+        <section className="board">
+          {squares.map((square, idx) => (
+            <Square
+              key={square}
+              id={square}
+              value={boardValues[idx]}
+              playerTurn={playerTurn}
+              onHandleTurns={(cellValue: string) => handleTurns(cellValue, idx)}
+              disabled={boardValues[idx] !== "" || winner !== ""}
+            />
+          ))}
+        </section>
+      </div>
+    </main>
   );
 }
 

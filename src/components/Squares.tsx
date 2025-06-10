@@ -1,3 +1,5 @@
+import "../css/cells.css";
+
 interface SquareInterface {
   id: string;
   value: string;
@@ -16,7 +18,14 @@ const Square = ({
     onHandleTurns(cellValue);
   };
   return (
-    <button type="button" onClick={handleClick} disabled={disabled}>
+    <button
+      type="button"
+      onClick={handleClick}
+      disabled={disabled}
+      className={`btn ${cellValue === "X" && "btn-x"} ${
+        cellValue === "O" && "btn-o"
+      }`}
+    >
       {value}
     </button>
   );
