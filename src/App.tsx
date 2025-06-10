@@ -23,6 +23,9 @@ function App() {
       [2, 4, 6],
     ];
 
+    // handling the draw case
+    if (!boardValues.includes("")) setWinner("draw");
+
     for (let [a, b, c] of winCombinations) {
       if (
         boardValues[a] &&
@@ -43,7 +46,12 @@ function App() {
 
   return (
     <>
-      {winner && <p>The winner is {winner}!</p>}
+      {winner &&
+        (winner !== "draw" ? (
+          <p>The winner is {winner}!</p>
+        ) : (
+          <p>It's a draw</p>
+        ))}
       <div className="board-container">
         {squares.map((square, idx) => (
           <Square
@@ -52,7 +60,7 @@ function App() {
             value={boardValues[idx]}
             playerTurn={playerTurn}
             onHandleTurns={(cellValue: string) => handleTurns(cellValue, idx)}
-            disabled={boardValues[idx] !== ""}
+            disabled={boardValues[idx] !== "" || winner !== ""}
           />
         ))}
       </div>
