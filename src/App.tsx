@@ -23,6 +23,7 @@ function App() {
           value={boardValues[idx]}
           playerTurn={playerTurn}
           onHandleTurns={(cellValue: string) => handleTurns(cellValue, idx)}
+          disabled={boardValues[idx] !== ""}
         />
       ))}
     </div>
