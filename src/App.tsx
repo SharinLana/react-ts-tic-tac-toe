@@ -6,6 +6,7 @@ function App() {
   const squares = Array.from({ length: 9 }, (_, i) => i.toString());
   const [boardValues, setBoardValues] = useState<string[]>(Array(9).fill(""));
   const [playerTurn, setPlayerTurn] = useState<boolean>(false);
+  const [winner, setWinner] = useState(false);
 
   const handleTurns = (cellVal: string, index: number): void => {
     const updatedBoard = [...boardValues];
