@@ -1,4 +1,5 @@
 import "../css/cells.css";
+import { useState } from "react";
 
 interface SquareInterface {
   id: string;
@@ -13,8 +14,11 @@ const Square = ({
   disabled,
   onHandleTurns,
 }: SquareInterface) => {
+  const [cellValue, setSellValue] = useState<string>("");
+
   const handleClick = () => {
     const cellValue = playerTurn ? "O" : "X";
+    setSellValue(cellValue);
     onHandleTurns(cellValue);
   };
   return (
