@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./css/board.css";
 import Square from "./components/Squares";
 
@@ -7,6 +7,17 @@ function App() {
   const [boardValues, setBoardValues] = useState<string[]>(Array(9).fill(""));
   const [playerTurn, setPlayerTurn] = useState<boolean>(false);
   const [winner, setWinner] = useState(false);
+
+  useEffect(() => {
+    const winCombinations = [
+      // rows
+      [0, 1, 2], [3, 4, 5], [6, 7, 8],
+      // cols
+      [0, 3, 6], [1, 4, 7], [2, 5, 8],
+      // diagonals
+      [0, 4, 8], [2, 4, 6]
+    ]
+  }, [boardValues])
 
   const handleTurns = (cellVal: string, index: number): void => {
     const updatedBoard = [...boardValues];
