@@ -1,5 +1,5 @@
 import "../css/cells.css";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 interface SquareInterface {
   value: string;
