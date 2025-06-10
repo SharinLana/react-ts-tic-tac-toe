@@ -7,6 +7,8 @@ function App() {
   const [boardValues, setBoardValues] = useState<string[]>(Array(9).fill(""));
   const [playerTurn, setPlayerTurn] = useState<boolean>(false);
   const [winner, setWinner] = useState<string>("");
+  const [reloading, setReloading] = useState<string>("");
+  const [counter, setCounter] = useState<number>(3);
 
   useEffect(() => {
     const winCombinations = [
@@ -35,7 +37,28 @@ function App() {
         setWinner(boardValues[a]);
       }
     }
-  }, [boardValues, winner]);
+
+    // resetting the game
+    if (winner !== "" && counter > 0) {
+      setTimeout(() => {
+        setReloading(`Resetting the game in ${counter} ...`);
+      }, 1000)
+    }
+    if (counter === 0) {
+      window.location.reload();
+    }
+  }, [boardValues, winner, counter]);
+
+  useEffect(() => {
+    if (winner !== "") {
+      const counterInterval = setInterval(() => {
+        setCounter((prev) => prev - 1);
+      }, 1000);
+
+      // cleaning up
+      return () => clearInterval(counterInterval);
+    }
+  });
 
   const handleTurns = (cellVal: string, index: number): void => {
     const updatedBoard = [...boardValues];
@@ -70,6 +93,7 @@ function App() {
           ))}
         </section>
       </div>
+      {reloading && <p>{reloading}</p>}
     </main>
   );
 }
