@@ -42,18 +42,21 @@ function App() {
   };
 
   return (
-    <div className="board-container">
-      {squares.map((square, idx) => (
-        <Square
-          key={square}
-          id={square}
-          value={boardValues[idx]}
-          playerTurn={playerTurn}
-          onHandleTurns={(cellValue: string) => handleTurns(cellValue, idx)}
-          disabled={boardValues[idx] !== ""}
-        />
-      ))}
-    </div>
+    <>
+      {winner && <p>The winner is {winner}!</p>}
+      <div className="board-container">
+        {squares.map((square, idx) => (
+          <Square
+            key={square}
+            id={square}
+            value={boardValues[idx]}
+            playerTurn={playerTurn}
+            onHandleTurns={(cellValue: string) => handleTurns(cellValue, idx)}
+            disabled={boardValues[idx] !== ""}
+          />
+        ))}
+      </div>
+    </>
   );
 }
 
