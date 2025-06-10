@@ -6,7 +6,6 @@ interface SquareInterface {
   onHandleTurns: (cellVal: string) => void;
 }
 const Square = ({
-  id,
   value,
   playerTurn,
   disabled,
