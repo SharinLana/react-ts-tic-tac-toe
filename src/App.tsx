@@ -9,6 +9,7 @@ function App() {
   const [winner, setWinner] = useState<string>("");
   const [reloading, setReloading] = useState<string>("");
   const [counter, setCounter] = useState<number>(3);
+  const [winnerIdx, setWinnerIdx] = useState<number[]>([]);
 
   useEffect(() => {
     const winCombinations = [
@@ -35,6 +36,7 @@ function App() {
         boardValues[a] === boardValues[c]
       ) {
         setWinner(boardValues[a]);
+        setWinnerIdx([a, b, c])
       }
     }
 
@@ -42,7 +44,7 @@ function App() {
     if (winner !== "" && counter > 0) {
       setTimeout(() => {
         setReloading(`Resetting the game in ${counter} ...`);
-      }, 1000)
+      }, 1000);
     }
     if (counter === 0) {
       window.location.reload();
@@ -71,17 +73,23 @@ function App() {
     <main>
       <h1>Tic-Tac-Toe</h1>
       <div className="winner-container">
-        {winner &&
-          (winner !== "draw" ? (
-            <p>The winner is {winner}!</p>
-          ) : (
-            <p>It's a draw</p>
-          ))}
+        {winner && (
+          <p className="winner-par">
+            {winner !== "draw"
+              ? `The winner is ${winner} ! 🎉 🏆`
+              : "It's a draw 🤝"}
+          </p>
+        )}
       </div>
       <div className="board-container">
         <section className="board">
           {squares.map((square, idx) => (
-            <div className="square-container" key={square}>
+            <div
+              className={`square-container ${
+                winnerIdx.includes(idx) && "winnerSquare"
+              }`}
+              key={square}
+            >
               <Square
                 value={boardValues[idx]}
                 playerTurn={playerTurn}
