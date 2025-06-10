@@ -2,7 +2,6 @@ import "../css/cells.css";
 import { useState } from "react";
 
 interface SquareInterface {
-  id: string;
   value: string;
   playerTurn: boolean;
   disabled: boolean;
@@ -21,6 +20,7 @@ const Square = ({
     setSellValue(cellValue);
     onHandleTurns(cellValue);
   };
+
   return (
     <button
       type="button"

@@ -38,13 +38,11 @@ function App() {
   }, [boardValues, winner]);
 
   const handleTurns = (cellVal: string, index: number): void => {
-    console.log(cellVal);
     const updatedBoard = [...boardValues];
     updatedBoard[index] = cellVal;
     setBoardValues(updatedBoard);
     setPlayerTurn((prev) => !prev);
   };
-  // console.log(boardValues)
 
   return (
     <main>
@@ -59,14 +57,16 @@ function App() {
       <div className="board-container">
         <section className="board">
           {squares.map((square, idx) => (
-            <Square
-              key={square}
-              id={square}
-              value={boardValues[idx]}
-              playerTurn={playerTurn}
-              onHandleTurns={(cellValue: string) => handleTurns(cellValue, idx)}
-              disabled={boardValues[idx] !== "" || winner !== ""}
-            />
+            <div className="square-container" key={square}>
+              <Square
+                value={boardValues[idx]}
+                playerTurn={playerTurn}
+                onHandleTurns={(cellValue: string) =>
+                  handleTurns(cellValue, idx)
+                }
+                disabled={boardValues[idx] !== "" || winner !== ""}
+              />
+            </div>
           ))}
         </section>
       </div>
