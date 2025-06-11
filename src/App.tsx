@@ -6,13 +6,13 @@ import Board from "./components/Board";
 import Message from "./components/Message";
 
 function App() {
-  const squares = Array.from({ length: 9 }, (_, i) => i.toString());
-  const [boardValues, setBoardValues] = useState<string[]>(Array(9).fill(""));
+  const squares = Array(9).fill("");
+  const [boardValues, setBoardValues] = useState<string[]>(squares);
   const [playerTurn, setPlayerTurn] = useState<boolean>(false);
   const [winner, setWinner] = useState<string>("");
   const [reloading, setReloading] = useState<string>("");
-  const [counter, setCounter] = useState<number>(3);
-  const [winnerIdx, setWinnerIdx] = useState<number[]>([]);
+  const [counter, setCounter] = useState<number>(3); // to reset state in 3 seconds
+  const [winnerIdx, setWinnerIdx] = useState<number[]>([]); // to highlight the winning squares
 
   const resetState = () => {
     setBoardValues(Array(9).fill(""));
