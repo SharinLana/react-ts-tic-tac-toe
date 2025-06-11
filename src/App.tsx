@@ -11,7 +11,7 @@ function App() {
   const [playerTurn, setPlayerTurn] = useState<boolean>(false);
   const [winner, setWinner] = useState<string>("");
   const [reloading, setReloading] = useState<string>("");
-  const [counter, setCounter] = useState<number>(2);
+  const [counter, setCounter] = useState<number>(3);
   const [winnerIdx, setWinnerIdx] = useState<number[]>([]);
 
   const resetState = () => {
@@ -19,7 +19,7 @@ function App() {
     setPlayerTurn(false);
     setWinner("");
     setReloading("");
-    setCounter(2);
+    setCounter(3);
     setWinnerIdx([]);
   };
 

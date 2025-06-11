@@ -9,7 +9,7 @@ const WinnerTitle = ({ winner }: WinnerInterface) => {
       {winner && (
         <p className="winner-par">
           {winner !== "draw"
-            ? `The winner is ${winner} ! 🎉 🏆`
+            ? `The winner is ${winner} ! 🏆`
             : "It's a draw 🤝"}
         </p>
       )}
