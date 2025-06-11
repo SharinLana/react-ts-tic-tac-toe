@@ -1,46 +1,25 @@
-# Getting Started with Create React App
+## ------------------------------- TIC-TAC-TOE ------------------------------
+React.js + TypeScript + npm
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Installation process:
+```sh
+  npx create-react-app react-tic-tac-toe --template typescript # (say yes to any prompts)
+```
 
-## Available Scripts
+Step-by-step guidance:
 
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+1. Create an array of the length === 9. Fill it with numbers.
+2. Use this array to create a board made out of buttons (indexes === array values).
+3. Style the board using CSS grid.
+4. Set the board button values to empty strings using useState.
+5. Create a global state to handle players' turns (false = "X" player, true = "O" player) + handle it on the button click.
+6. In the same handler, change the value of the clicked board button to "O" or 'X" depending on the turn state;
+7. Disable the clicked button (if the board value !== ""). 
+8. Set state for the winner (false).
+9. use useEffect to track every boardValues modification. If modified, define whether we have a winner or not (create a nested array with all possible win combinations) and every time the boardValues has changed, loop through them and check if we have a match. If so, reset the winner.
+10. If we have the winner, display it on the screen.
+11. Handle the draw case in the useEffect by checking if all the values of the boardValues are non-empty strings.
+12. Disable all the buttons if we have a winner.
+13. Style the application.
+14. Refactor the code if needed.
+15. Push to GitHub.
