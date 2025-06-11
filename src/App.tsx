@@ -8,8 +8,17 @@ function App() {
   const [playerTurn, setPlayerTurn] = useState<boolean>(false);
   const [winner, setWinner] = useState<string>("");
   const [reloading, setReloading] = useState<string>("");
-  const [counter, setCounter] = useState<number>(3);
+  const [counter, setCounter] = useState<number>(2);
   const [winnerIdx, setWinnerIdx] = useState<number[]>([]);
+
+  const resetState = () => {
+    setBoardValues(Array(9).fill(""));
+    setPlayerTurn(false);
+    setWinner("");
+    setReloading("");
+    setCounter(3);
+    setWinnerIdx([]);
+  }
 
   useEffect(() => {
     const winCombinations = [
@@ -44,10 +53,10 @@ function App() {
     if (winner !== "" && counter > 0) {
       setTimeout(() => {
         setReloading(`Resetting the game in ${counter} ...`);
-      }, 1000);
+      }, 800);
     }
-    if (counter === 0) {
-      window.location.reload();
+    if (counter <= -1) {
+      resetState();
     }
   }, [boardValues, winner, counter]);
 
@@ -97,6 +106,7 @@ function App() {
                   handleTurns(cellValue, idx)
                 }
                 disabled={boardValues[idx] !== "" || winner !== ""}
+        
               />
             </div>
           ))}
