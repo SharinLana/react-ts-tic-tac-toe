@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
-import "./css/board.css";
-import Square from "./components/Squares";
+import "./css/App.css";
+import Header from "./components/Header";
+import WinnerTitle from "./components/WinnerTitle";
+import Board from "./components/Board";
+import Message from "./components/Message";
 
 function App() {
   const squares = Array.from({ length: 9 }, (_, i) => i.toString());
@@ -16,9 +19,9 @@ function App() {
     setPlayerTurn(false);
     setWinner("");
     setReloading("");
-    setCounter(3);
+    setCounter(2);
     setWinnerIdx([]);
-  }
+  };
 
   useEffect(() => {
     const winCombinations = [
@@ -45,7 +48,7 @@ function App() {
         boardValues[a] === boardValues[c]
       ) {
         setWinner(boardValues[a]);
-        setWinnerIdx([a, b, c])
+        setWinnerIdx([a, b, c]);
       }
     }
 
@@ -60,6 +63,7 @@ function App() {
     }
   }, [boardValues, winner, counter]);
 
+  // modifying counter state
   useEffect(() => {
     if (winner !== "") {
       const counterInterval = setInterval(() => {
@@ -69,7 +73,7 @@ function App() {
       // cleaning up
       return () => clearInterval(counterInterval);
     }
-  });
+  }, [winner]);
 
   const handleTurns = (cellVal: string, index: number): void => {
     const updatedBoard = [...boardValues];
@@ -80,39 +84,17 @@ function App() {
 
   return (
     <main>
-      <h1>Tic-Tac-Toe</h1>
-      <div className="winner-container">
-        {winner && (
-          <p className="winner-par">
-            {winner !== "draw"
-              ? `The winner is ${winner} ! 🎉 🏆`
-              : "It's a draw 🤝"}
-          </p>
-        )}
-      </div>
-      <div className="board-container">
-        <section className="board">
-          {squares.map((square, idx) => (
-            <div
-              className={`square-container ${
-                winnerIdx.includes(idx) && "winnerSquare"
-              }`}
-              key={square}
-            >
-              <Square
-                value={boardValues[idx]}
-                playerTurn={playerTurn}
-                onHandleTurns={(cellValue: string) =>
-                  handleTurns(cellValue, idx)
-                }
-                disabled={boardValues[idx] !== "" || winner !== ""}
-        
-              />
-            </div>
-          ))}
-        </section>
-      </div>
-      {reloading && <p>{reloading}</p>}
+      <Header className="header" title="Tic-Tac-Toe" />
+      <WinnerTitle winner={winner} />
+      <Board
+        squares={squares}
+        winner={winner}
+        winnerIdx={winnerIdx}
+        boardValues={boardValues}
+        playerTurn={playerTurn}
+        onHandleTurns={handleTurns}
+      />
+      <Message reloading={reloading} />
     </main>
   );
 }

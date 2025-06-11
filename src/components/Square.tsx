@@ -1,4 +1,4 @@
-import "../css/cells.css";
+import "../css/Square.css";
 
 interface SquareInterface {
   value: string;
